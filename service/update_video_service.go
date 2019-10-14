@@ -23,7 +23,7 @@ func (service *UpdateVideoService) Update(id string) serializer.Response{
 
 	video.Title = service.Title
 	video.Info = service.Info
-	err = model.DB.Model(&video).Update("title","info").Error
+	err = model.DB.Save(&video).Error
 	if err != nil {
 		return serializer.Response{
 			Code: 50002,
