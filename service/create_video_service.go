@@ -6,13 +6,15 @@ import (
 )
 
 type CreateVideoService struct {
-	Title string `json:"title" binding:"required,min=2,max=20"`
-	Info string `json:"info" binding:"required,min=0,max=200"`
+	Title string `json:"title" binding:"required,min=2,max=50"`
+	Info string `json:"info" binding:"required,min=0,max=300"`
+	URL string `json:"url"`
 }
 func (service *CreateVideoService) Create() serializer.Response{
 	video := model.Video{
 		Title: service.Title,
 		Info : service.Info,
+		URL : service.URL,
 	}
 	//全局单例DB
 	err := model.DB.Create(&video).Error
