@@ -7,7 +7,7 @@ import (
 
 type CreateVideoService struct {
 	Title string `json:"title" binding:"required,min=2,max=50"`
-	Info string `json:"info" binding:"required,min=0,max=300"`
+	Info string `json:"info" binding:"min=0,max=300"`
 	URL string `json:"url"`
 }
 func (service *CreateVideoService) Create() serializer.Response{

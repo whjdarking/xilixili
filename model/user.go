@@ -17,7 +17,7 @@ type User struct {
 
 const (
 	// PassWordCost 密码加密难度
-	PassWordCost = 12
+	PassWordCost = 4
 	// Active 激活用户
 	Active string = "active"
 	// Inactive 未激活用户

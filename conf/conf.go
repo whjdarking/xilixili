@@ -4,6 +4,7 @@ import (
 	"os"
 	"xilixili/cache"
 	"xilixili/model"
+	"xilixili/task"
 	"xilixili/util"
 
 	"github.com/joho/godotenv"
@@ -25,4 +26,7 @@ func Init() {
 	// 连接数据库
 	model.Database(os.Getenv("MYSQL_DSN"))
 	cache.Redis()
+
+	//开始计时
+	task.CronJob()
 }

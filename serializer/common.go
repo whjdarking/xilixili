@@ -9,11 +9,24 @@ type Response struct {
 	Msg   string      `json:"msg"`
 	Error string      `json:"error,omitempty"`
 }
+type DataList struct {
+	Items interface{} `json:"items"`
+	Total uint        `json:"total"`
+}
 
 // TrackedErrorResponse 有追踪信息的错误响应
 type TrackedErrorResponse struct {
 	Response
 	TrackID string `json:"track_id"`
+}
+
+func BuildListResponse(items interface{}, total uint) Response {
+	return Response{
+		Data: DataList{
+			Items: items,
+			Total: total,
+		},
+	}
 }
 
 // 三位数错误编码为复用http原本含义
@@ -54,7 +67,7 @@ func Err(errCode int, msg string, err error) Response {
 	return res
 }
 
-// DBErr 数据库操作失败
+// DBErr 数据库操作失败  //Not used
 func DBErr(msg string, err error) Response {
 	if msg == "" {
 		msg = "数据库操作失败"
