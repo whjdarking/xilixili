@@ -11,6 +11,7 @@ type Video struct{
 	Title string
 	Info string `sql:"type:text"`
 	URL string
+	Avatar string
 }
 func (video *Video) View() uint64 {
 	countStr, _ := cache.RedisClient.Get(cache.VideoViewKey(video.ID)).Result()

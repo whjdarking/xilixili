@@ -16,16 +16,7 @@ func (service *ListVideoService) List() serializer.Response{
 	if service.Limit == 0 {
 		service.Limit = 6
 	}
-	//全局单例DB
-	//err := model.DB.Find(&videos).Error
-	//if err != nil {
-	//	return serializer.Response{
-	//		//如果要处理需要到api那里给c
-	//		Code: 404,
-	//		Msg:  "不存在",
-	//		Error: err.Error(), //打出错误信息
-	//	}
-	//}
+
 	err := model.DB.Model(model.Video{}).Count(&total).Error  //gorm中查video这张表，并把count*给total
 	if err != nil {
 		return serializer.Response{
