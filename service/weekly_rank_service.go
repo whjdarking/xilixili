@@ -15,7 +15,7 @@ type WeeklyRankService struct {
 func (service *WeeklyRankService) Get() serializer.Response {
 	var videos []model.Video
 
-	vids, _ := cache.RedisClient.ZRevRange(cache.WeeklyRankKey, 0, 9).Result() //取出前10
+	vids, _ := cache.RedisClient.ZRevRange(cache.WeeklyRankKey, 0, 4).Result() //取出前5
 
 	if len(vids) > 1 {
 		order := fmt.Sprintf("FIELD(id, %s)", strings.Join(vids, ","))
