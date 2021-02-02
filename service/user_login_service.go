@@ -1,17 +1,16 @@
 package service
 
 import (
-	"xilixili/model"
-	"xilixili/serializer"
-
+	"Refactor_xilixili/model"
+	"Refactor_xilixili/serializer"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
 
 // UserLoginService 管理用户登录的服务
 type UserLoginService struct {
-	UserName string `form:"user_name" json:"user_name" binding:"required,min=5,max=30"`
-	Password string `form:"password" json:"password" binding:"required,min=8,max=40"`
+	UserName string `form:"user_name" json:"user_name" binding:"required,min=2,max=30"`
+	Password string `form:"password" json:"password" binding:"required,min=6,max=40"`
 }
 
 // setSession 设置session

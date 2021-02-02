@@ -1,16 +1,15 @@
 package service
 
 import (
-	"xilixili/model"
-	"xilixili/serializer"
+	"Refactor_xilixili/model"
+	"Refactor_xilixili/serializer"
 )
 
 // UserRegisterService 管理用户注册服务
 type UserRegisterService struct {
-	Nickname        string `form:"nickname" json:"nickname" binding:"required,min=2,max=30"`
-	UserName        string `form:"user_name" json:"user_name" binding:"required,min=5,max=30"`
-	Password        string `form:"password" json:"password" binding:"required,min=8,max=40"`
-	PasswordConfirm string `form:"password_confirm" json:"password_confirm" binding:"required,min=8,max=40"`
+	UserName        string `form:"user_name" json:"user_name" binding:"required,min=2,max=30"`
+	Password        string `form:"password" json:"password" binding:"required,min=6,max=40"`
+	PasswordConfirm string `form:"password_confirm" json:"password_confirm" binding:"required,min=6,max=40"`
 }
 
 // valid 验证表单
@@ -22,15 +21,7 @@ func (service *UserRegisterService) valid() *serializer.Response {
 		}
 	}
 
-	count := 0
-	model.DB.Model(&model.User{}).Where("nickname = ?", service.Nickname).Count(&count)
-	if count > 0 {
-		return &serializer.Response{
-			Code: 40001,
-			Msg:  "昵称被占用",
-		}
-	}
-
+	var count int64
 	count = 0
 	model.DB.Model(&model.User{}).Where("user_name = ?", service.UserName).Count(&count)
 	if count > 0 {
@@ -45,15 +36,14 @@ func (service *UserRegisterService) valid() *serializer.Response {
 
 // Register 用户注册
 func (service *UserRegisterService) Register() serializer.Response {
-	user := model.User{
-		Nickname: service.Nickname,
-		UserName: service.UserName,
-		Status:   model.Active,
-	}
-
 	// 表单验证
 	if err := service.valid(); err != nil {
 		return *err
+	}
+
+	user := model.User{
+		UserName: service.UserName,
+		Status:   "active",
 	}
 
 	// 加密密码

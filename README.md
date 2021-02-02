@@ -1,7 +1,7 @@
 # Xilixili
-A demo website for video strYeam and upload.
+A demo website for video watching and upload.
  
 ## Main technology stack
 Go+Gin+Gorm  
 Vue.js  
-AWS+Docker
+Aliyun+Docker

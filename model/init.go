@@ -1,35 +1,31 @@
 package model
 
 import (
-	"xilixili/util"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 	"time"
-
-	"github.com/jinzhu/gorm"
-
-	//
-	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-// DB 数据库链接单例
 var DB *gorm.DB
 
-// Database 在中间件中初始化mysql链接
 func Database(connString string) {
-	db, err := gorm.Open("mysql", connString)
-	db.LogMode(true)
-	// Error
+
+	db, err := gorm.Open(mysql.Open(connString), &gorm.Config{})
 	if err != nil {
-		util.Log().Panic("连接数据库不成功", err)
+		panic("数据库连接不成功")
 	}
 	//设置连接池
+	sqlDB, err := db.DB()
+	if err != nil {
+		panic("设置通用数据库对象失败")
+	}
 	//空闲
-	db.DB().SetMaxIdleConns(50)
+	sqlDB.SetMaxIdleConns(30)
 	//打开
-	db.DB().SetMaxOpenConns(100)
+	sqlDB.SetMaxOpenConns(50)
 	//超时
-	db.DB().SetConnMaxLifetime(time.Second * 30)
-
+	sqlDB.SetConnMaxLifetime(time.Second * 30)
 	DB = db
 
-	migration()
+	DB.AutoMigrate(&User{}, &Video{})
 }

@@ -1,21 +1,23 @@
 package service
 
 import (
+	"Refactor_xilixili/cache"
+	"Refactor_xilixili/model"
+	"Refactor_xilixili/serializer"
+	"context"
 	"fmt"
 	"strings"
-	"xilixili/cache"
-	"xilixili/model"
-	"xilixili/serializer"
 )
 
 type WeeklyRankService struct {
-
 }
+
+var ctx = context.TODO()
 
 func (service *WeeklyRankService) Get() serializer.Response {
 	var videos []model.Video
 
-	vids, _ := cache.RedisClient.ZRevRange(cache.WeeklyRankKey, 0, 4).Result() //取出前5
+	vids, _ := cache.RedisClient.ZRevRange(ctx, cache.WeeklyRankKey, 0, 4).Result() //取出前5
 
 	if len(vids) > 1 {
 		order := fmt.Sprintf("FIELD(id, %s)", strings.Join(vids, ","))
@@ -23,8 +25,8 @@ func (service *WeeklyRankService) Get() serializer.Response {
 
 		if err != nil {
 			return serializer.Response{
-				Code: 50000,
-				Msg:  "redis连接错误",
+				Code:  50000,
+				Msg:   "redis连接错误",
 				Error: err.Error(),
 			}
 		}

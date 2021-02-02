@@ -14,12 +14,6 @@ type DataList struct {
 	Total uint        `json:"total"`
 }
 
-// TrackedErrorResponse 有追踪信息的错误响应
-type TrackedErrorResponse struct {
-	Response
-	TrackID string `json:"track_id"`
-}
-
 func BuildListResponse(items interface{}, total uint) Response {
 	return Response{
 		Data: DataList{
@@ -29,10 +23,6 @@ func BuildListResponse(items interface{}, total uint) Response {
 	}
 }
 
-// 三位数错误编码为复用http原本含义
-// 五位数错误编码为应用自定义错误
-// 五开头的五位数错误编码为服务器端错误，比如数据库操作失败
-// 四开头的五位数错误编码为客户端错误，有时候是客户端代码写错了，有时候是用户操作错误
 const (
 	// CodeCheckLogin 未登录
 	CodeCheckLogin = 401
@@ -46,14 +36,6 @@ const (
 	CodeParamErr = 40001
 )
 
-// CheckLogin 检查登录
-func CheckLogin() Response {
-	return Response{
-		Code: CodeCheckLogin,
-		Msg:  "未登录",
-	}
-}
-
 // Err 通用错误处理
 func Err(errCode int, msg string, err error) Response {
 	res := Response{
@@ -65,14 +47,6 @@ func Err(errCode int, msg string, err error) Response {
 		res.Error = err.Error()
 	}
 	return res
-}
-
-// DBErr 数据库操作失败  //Not used
-func DBErr(msg string, err error) Response {
-	if msg == "" {
-		msg = "数据库操作失败"
-	}
-	return Err(CodeDBError, msg, err)
 }
 
 // ParamErr 各种参数错误
