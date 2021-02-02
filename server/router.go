@@ -1,6 +1,7 @@
 package server
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"os"
 )
@@ -14,7 +15,7 @@ func NewRouter() *gin.Engine {
 	//提取当前用户(若是能提取到，说明第一步的启用session已经成功了，也说明曾经是被下发过session cookie的)
 	r.Use(CurrentUser())
 	//配置跨域
-	r.Use(Cors())
+	r.Use(cors.Default())
 
 	// 路由
 	v1 := r.Group("/api/v1")
