@@ -1,7 +1,7 @@
-#FROM golang as build
-#COPY . /usr/local/go/src/xilixili
-#WORKDIR /usr/local/go/src/xilixili
-#RUN  go build -o xili-server
+FROM golang as build
+COPY . /usr/local/go/src/xilixili
+WORKDIR /usr/local/go/src/xilixili
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o api_server
 
 FROM alpine
 
