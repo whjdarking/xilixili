@@ -1,7 +1,7 @@
-FROM golang as build
-COPY . /usr/local/go/src/xilixili
-WORKDIR /usr/local/go/src/xilixili
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o api_server
+#FROM golang as build
+#COPY . /usr/local/go/src/xilixili
+#WORKDIR /usr/local/go/src/xilixili
+#SET CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o api_server 这是本地编译使用的，没有使用FROM golang
 
 FROM alpine
 
