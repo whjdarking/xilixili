@@ -17,7 +17,7 @@ ENV OSS_ACCESS_KEY_SECRET="kTDDj49Y9gRND2TLr1038K5LMZhUvu"
 ENV OSS_BUCKET="xilixili"
 
 #SET CGO_ENABLED=0 SET GOOS=linux SET GOARCH=amd64 go build main.go
-COPY xili-server /usr/bin/xili-server
+COPY Refactor_xilixili /usr/bin/xili-server
 RUN chmod +x /usr/bin/xili-server
 
 ENTRYPOINT ["xili-server"]
