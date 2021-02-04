@@ -21,7 +21,7 @@ func Redis() {
 
 	_, err := client.Ping(ctx).Result()
 	if err != nil {
-		panic("连接Redis不成功")
+		panic("连接Redis不成功," + os.Getenv("REDIS_ADDR"))
 	}
 	RedisClient = client
 }
