@@ -8,7 +8,8 @@ Go+Gin+Gorm
 MySQL+Redis  
 Docker+Kubernetes  
 Vue.js  前端请参照 <https://github.com/whjdarking/xilixili_view>
-##文件树
+
+## 文件树
 ```
 │  .gitignore
 │  Dockerfile_example  //打包到docker
@@ -48,9 +49,11 @@ Vue.js  前端请参照 <https://github.com/whjdarking/xilixili_view>
        list_video_service.go
        ......
 ```
-##数据库
+
+## 数据库
 项目需要预先启动MySQL和Redis，否则会直接panic。  
 Redis专门保存视频点击量，同时用作排行榜。
-##其它
+
+## 其它
 本项目运行在centos7+kubernetes内，实现了https化，部分yaml文件可参照[other_resources](other_resources)文件夹。  
 提供简单的postman单元测试，了解各url接口设计的功能，参照文件夹。
