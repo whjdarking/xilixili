@@ -1,0 +1,23 @@
+#FROM golang as build
+#COPY . /usr/local/go/src/xilixili
+#WORKDIR /usr/local/go/src/xilixili 以上为一种设想
+#SET CGO_ENABLED=0 GOOS=linux GOARCH=amd64 之后 go build  图方便本地编译使用的，没有使用FROM golang
+
+FROM alpine
+
+ENV MYSQL_DSN="your mysql dsn"
+ENV REDIS_ADDR="redis addr:port"
+ENV REDIS_PW="redis password"
+ENV REDIS_DB=""
+ENV SESSION_SECRET=""
+ENV GIN_MODE="release"
+ENV OSS_END_POINT="oss-cn-hongkong.aliyuncs.com"
+ENV OSS_ACCESS_KEY_ID="create and get from aliyun to get privilege"
+ENV OSS_ACCESS_KEY_SECRET="get from aliyun"
+ENV OSS_BUCKET="xilixili"
+
+COPY Refactor_xilixili /usr/bin/xili-server #直接将build好的linux可执行文件拷进docker跑就行了
+RUN chmod +x /usr/bin/xili-server
+
+ENTRYPOINT ["xili-server"]
+
