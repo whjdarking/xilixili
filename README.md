@@ -56,4 +56,4 @@ Redis专门保存视频点击量，同时用作排行榜。
 
 ## 其它
 本项目运行在centos7+kubernetes内，实现了https化，部分yaml文件可参照[other_resources](other_resources)文件夹。  
-提供简单的postman单元测试，了解各url接口设计的功能，参照文件夹。
+提供简单的postman接口测试，了解各url接口设计的功能，参照文件夹。
