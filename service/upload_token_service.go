@@ -38,13 +38,13 @@ func (service *UploadTokenService) Post() serializer.Response {
 	// 获取扩展名
 	ext := filepath.Ext(service.Filename)
 
-	// 带可选参数的签名直传。
+	// 带可选参数上传。
 	options := []oss.Option{
 		oss.ContentType(mime.TypeByExtension(ext)),
 	}
 
 	key := "avatar/" + uuid.Must(uuid.NewRandom()).String() + ext
-	// 签名直传。
+	// 上传传。
 	signedPutURL, err := bucket.SignURL(key, oss.HTTPPut, 600, options...)
 	if err != nil {
 		return serializer.Response{
