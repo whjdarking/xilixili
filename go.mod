@@ -13,7 +13,7 @@ require (
 	github.com/joho/godotenv v1.3.0
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/satori/go.uuid v1.2.0 // indirect
-	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad
+	golang.org/x/crypto v0.1.0
 	golang.org/x/time v0.0.0-20201208040808-7e3f01d25324 // indirect
 	gorm.io/driver/mysql v1.0.3
 	gorm.io/gorm v1.20.11
